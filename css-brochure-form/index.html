@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CSS Challenge - Brochure Form</title>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <h2> Learn More </h2>
+  <form>
+    <section class="question-border">
+      <div class="question"><label class="indent" for="companyEmail"> Company Email </label></div>
+      <input class="resized-textbox" name="companyEmail" type="text" placeholder="sally&commat;company.co">
+
+      <div class="question"><label class="indent" for="name"> Name </label></div>
+      <input class="resized-textbox" name="name" type="text" placeholder="Sally Smith">
+
+      <div class="question"><label class="indent" for="location"> Where are you hiring? </label></div>
+      <input class="resized-textbox"" name="location" type="text" placeholder="City, Counrty">
+
+      <div class="question"><label class="indent" for="Many-engineers">How many engineers are you hiring in the next 6
+          months? </label></div>
+      <select class="drop-down" name="Many-engineers" id="Many-engineers">
+        <option value="1-2"> 1-2 Engineers</option>
+        <option value="3-4"> 3-4 Engineers</option>
+        <option value="5-6"> 5-6 Engineers</option>
+        <option value="7-8"> 7-8 Engineers</option>
+        <option value="9+"> 9+ Engineers</option>
+      </select>
+
+      <section class="submit-button ">
+        <input class="submit-button-shape" type="submit" value="Submit">
+      </section>
+    </section>
+  </form>
+</body>
+
+</html>
