@@ -1,0 +1,19 @@
+button {
+  font-size: 24px;
+  padding: 15px 25px;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+th {
+  background-color: black;
+  color: white;
+}
+
+tr:nth-child(odd) {
+  background-color: rgb(210 210 210);
+}
