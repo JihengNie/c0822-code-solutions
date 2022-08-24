@@ -1,0 +1,15 @@
+h1 {
+  font-family: 'Silkscreen', cursive;
+}
+
+h2 {
+  font-family: 'Silkscreen', cursive;
+  font-style: italic;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+p {
+  font-family: 'DynaPuff', cursive;
+  line-height: 4em;
+}
