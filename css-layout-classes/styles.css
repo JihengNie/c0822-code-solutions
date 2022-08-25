@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-one-third {
+  justify-content: space-between;
+  flex-basis: calc(100% / 3);
+}
+
+.column-two-third {
+  justify-content: space-between;
+  flex-basis: calc((100% / 3 ) * 2);
+}
+
+.column-one-forth {
+  flex-basis: calc(100% / 4);
+}
+
+.too-big {
+  max-width: 200px;
+}
