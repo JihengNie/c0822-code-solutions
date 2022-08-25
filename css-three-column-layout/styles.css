@@ -35,12 +35,8 @@
 
 .image-container img {
   background-color: white;
-  text-align: center;
-  justify-content: center;
-  height: 5rem;
   width: 5rem;
   margin-top: 2.5rem;
-  flex-basis: calc(100%/3);
 }
 
 .description {
