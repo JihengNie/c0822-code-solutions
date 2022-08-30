@@ -1,0 +1,58 @@
+* {
+  box-sizing: border-box;
+  font-family: barlow, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.icon-container > img {
+  width: 50px;
+  justify-content: center;
+}
+
+.screen-container {
+  text-align: center;
+}
+
+.screen-container > img {
+  text-align: center;
+  width: 100%;
+}
+
+.icon-container {
+  text-align: center;
+}
+
+.card h3 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.card p {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  margin: auto;
+  flex-basis: 100%;
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column-fourth {
+  flex-basis: 25%;
+}
