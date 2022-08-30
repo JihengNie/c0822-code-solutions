@@ -32,12 +32,12 @@ body {
   text-align: center;
 }
 
-.card-column h3 {
+.card h3 {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.card-column p {
+.card p {
   text-align: center;
 }
 
