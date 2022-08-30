@@ -59,6 +59,6 @@ body {
   flex-direction: row;
 }
 
-.card {
+.column-forth {
   flex-basis: 25%;
 }
