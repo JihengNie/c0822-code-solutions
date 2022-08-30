@@ -14,12 +14,6 @@ body {
   margin: auto;
 }
 
-.columns {
-  display: flex;
-  margin: auto;
-  text-align: center;
-}
-
 .icon-container > img {
   width: 50px;
   justify-content: center;
@@ -38,12 +32,12 @@ body {
   text-align: center;
 }
 
-.column h3 {
+.card-column h3 {
   text-align: center;
   margin-bottom: 2rem;
 }
 
-.column p {
+.card-column p {
   text-align: center;
 }
 
@@ -59,6 +53,6 @@ body {
   flex-direction: row;
 }
 
-.column-forth {
+.column-fourth {
   flex-basis: 25%;
 }
