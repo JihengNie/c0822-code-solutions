@@ -8,7 +8,7 @@ body {
 }
 
 .container {
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -32,12 +32,28 @@ body {
   padding: 0 10px;
 }
 
-.sizes {
-  color: red;
+.gray-text {
+  color: #e9e9e9;
   font-size: 12px;
+}
+
+.left-border-shading {
+  border-left: 2px solid #e9e9e9;
+  padding-left: 2px;
 }
 
 .product-img {
   width: 15rem;
   height: 20rem;
+}
+
+.object-fit {
+  object-fit: fill;
+}
+
+.price {
+  background-color: #fff2e7;
+  border-radius: 20%;
+  padding: 2px;
+  margin-right: 0.5rem;
 }
