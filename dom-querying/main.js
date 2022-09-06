@@ -1,4 +1,4 @@
-console.log('hello, world');
+console.log('Hello, world');
 console.log('h1 element', document.querySelector('h1'));
 console.dir(document.querySelector('h1'));
 
