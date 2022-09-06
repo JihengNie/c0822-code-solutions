@@ -21,15 +21,27 @@ function isItemInArray(item, array) {
 }
 
 function titleCase(title) {
-  var stringArray = title.split(' ');
-  var captilizedArray = [];
+  var lowerCasedTitle = title.toLowerCase();
+  var result = '';
+  var resultArray = [];
+  var stringArray = lowerCasedTitle.split(' ');
   var smallWords = ['and', 'or', 'nor', 'but', 'a', 'an', 'the', 'as', 'at', 'by', 'for', 'in', 'on', 'of', 'per', 'to'];
   for (var i = 0; i < stringArray.length; i++) {
     if (isItemInArray(stringArray[i].toLowerCase(), smallWords)) {
-      captilizedArray.push(stringArray[i].toLowerCase());
+      resultArray.push(stringArray[i].toLowerCase());
+      resultArray.push(stringArray[i].toLowerCase());
     } else {
-      captilizedArray.push(captilizeString(stringArray[i]));
+      if (stringArray[i].toLowerCase() === 'javascript') {
+        resultArray.push('JavaScript');
+      } else if (stringArray[i].toLowerCase() === 'api') {
+        resultArray.push('API');
+      } else {
+        resultArray.push(captilizeString(stringArray[i]));
+      }
     }
   }
-  return captilizedArray;
+  for (var j = 0; j < resultArray.length; j++) {
+    result += ' ' + resultArray[j];
+  }
+  return result;
 }
