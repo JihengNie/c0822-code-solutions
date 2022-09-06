@@ -14,10 +14,10 @@ function captilizeString(string) {
 function isItemInArray(item, array) {
   for (var i = 0; i < array.length; i++) {
     if (item === array[i]) {
-      return false;
+      return true;
     }
   }
-  return true;
+  return false;
 }
 
 function titleCase(title) {
@@ -26,7 +26,10 @@ function titleCase(title) {
   var smallWords = ['and', 'or', 'nor', 'but', 'a', 'an', 'the', 'as', 'at', 'by', 'for', 'in', 'on', 'of', 'per', 'to'];
   for (var i = 0; i < stringArray.length; i++) {
     if (isItemInArray(stringArray[i].toLowerCase(), smallWords)) {
+      captilizedArray.push(stringArray[i].toLowerCase());
+    } else {
       captilizedArray.push(captilizeString(stringArray[i]));
     }
   }
+  return captilizedArray;
 }
