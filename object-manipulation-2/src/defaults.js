@@ -11,15 +11,15 @@ use a for in loop for the source
 */
 
 function defaults(target, source) {
-  var counter = 0;
+  var check = true;
   for (var sourceItems in source) {
-    counter = 0;
+    check = true;
     for (var targetItems in target) {
       if (sourceItems === targetItems) {
-        counter++;
+        check = false;
       }
     }
-    if (counter === 0) {
+    if (check === true) {
       target[sourceItems] = source[sourceItems];
     }
   }

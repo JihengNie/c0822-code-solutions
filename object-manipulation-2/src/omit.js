@@ -13,15 +13,15 @@ return result
 
 function omit(source, keys) {
   var result = {};
-  var counter = 0;
+  var check = true;
   for (var items in source) {
-    counter = 0;
+    check = true;
     for (var i = 0; i < keys.length; i++) {
       if (items === keys[i]) {
-        counter++;
+        check = false;
       }
     }
-    if (counter === 0) {
+    if (check === true) {
       result[items] = source[items];
     }
   }
