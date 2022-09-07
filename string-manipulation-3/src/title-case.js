@@ -49,7 +49,7 @@ function isItemInArray(item, array) {
 function titleCase(title) {
   var lowerCasedTitle = title.toLowerCase();
   var eachWordCaptilized = '';
-  var edgeCaseCaptilized = '';
+  var wordCapitalizedWithPunctuation = '';
   var finalResult = '';
   var temp = '';
   var resultArray = [];
@@ -85,13 +85,13 @@ function titleCase(title) {
       temp += eachWordCaptilized[k];
     }
     if (eachWordCaptilized[k] === ' ') {
-      edgeCaseCaptilized += temp;
+      wordCapitalizedWithPunctuation += temp;
       temp = '';
     }
   }
-  edgeCaseCaptilized += temp;
-  for (var n = 0; n < edgeCaseCaptilized.length - 1; n++) {
-    finalResult += edgeCaseCaptilized[n];
+  wordCapitalizedWithPunctuation += temp;
+  for (var n = 0; n < wordCapitalizedWithPunctuation.length - 1; n++) {
+    finalResult += wordCapitalizedWithPunctuation[n];
   }
   finalResult = captilizeString(finalResult);
   return finalResult;
