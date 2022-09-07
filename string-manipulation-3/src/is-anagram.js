@@ -2,6 +2,7 @@
 /*
 combine both string
 need a count number
+check if the length of first string and second string is the same
 use a for loop to loop through combined string
   initialize count = 0 before the second loop
   if combined string at index is not ' '
@@ -11,9 +12,22 @@ use a for loop to loop through combined string
 return true
 */
 
+function removeSpaces(string) {
+  var result = '';
+  for (var i = 0; i < string.length; i++) {
+    if (string[i] !== ' ') {
+      result += string[i];
+    }
+  }
+  return result;
+}
+
 function isAnagram(firstString, secondString) {
   var toy = firstString + secondString;
   var count = 0;
+  if (removeSpaces(firstString).length !== removeSpaces(secondString).length) {
+    return false;
+  }
   for (var i = 0; i < toy.length; i++) {
     count = 0;
     if (toy[i] !== ' ') {

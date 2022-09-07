@@ -48,8 +48,8 @@ function isItemInArray(item, array) {
 
 function titleCase(title) {
   var lowerCasedTitle = title.toLowerCase();
-  var result1 = '';
-  var result2 = '';
+  var eachWordCaptilized = '';
+  var edgeCaseCaptilized = '';
   var finalResult = '';
   var temp = '';
   var resultArray = [];
@@ -69,29 +69,29 @@ function titleCase(title) {
     }
   }
   for (var j = 0; j < resultArray.length; j++) {
-    result1 += resultArray[j] + ' ';
+    eachWordCaptilized += resultArray[j] + ' ';
   }
 
-  for (var k = 0; k < result1.length; k++) {
+  for (var k = 0; k < eachWordCaptilized.length; k++) {
     if (temp === 'Javascript') {
       temp = 'JavaScript';
     }
     if (temp === 'Api') {
       temp = 'API';
     }
-    if (result1[k - 1] === '-' || result1[k - 1] === ':' || result1[k - 2] === ':' || result1[k - 1] === '"') {
-      temp += result1[k].toUpperCase();
+    if (eachWordCaptilized[k - 1] === '-' || eachWordCaptilized[k - 1] === ':' || eachWordCaptilized[k - 2] === ':' || eachWordCaptilized[k - 1] === '"') {
+      temp += eachWordCaptilized[k].toUpperCase();
     } else {
-      temp += result1[k];
+      temp += eachWordCaptilized[k];
     }
-    if (result1[k] === ' ') {
-      result2 += temp;
+    if (eachWordCaptilized[k] === ' ') {
+      edgeCaseCaptilized += temp;
       temp = '';
     }
   }
-  result2 += temp;
-  for (var n = 0; n < result2.length - 1; n++) {
-    finalResult += result2[n];
+  edgeCaseCaptilized += temp;
+  for (var n = 0; n < edgeCaseCaptilized.length - 1; n++) {
+    finalResult += edgeCaseCaptilized[n];
   }
   finalResult = captilizeString(finalResult);
   return finalResult;
