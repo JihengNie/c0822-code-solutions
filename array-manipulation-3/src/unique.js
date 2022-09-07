@@ -7,9 +7,21 @@ need a for loop
 return output array
 */
 
+function isNotInArray(array, value) {
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function unique(array) {
   var result = [];
   for (var i = 0; i < array.length; i++) {
-    result.push(1);
+    if (isNotInArray(result, array[i])) {
+      result.push(array[i]);
+    }
   }
+  return result;
 }
