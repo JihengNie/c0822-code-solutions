@@ -7,9 +7,9 @@ need a for loop
 return output array
 */
 
-function isNotInArray(array, value) {
+function isNotInArray(value, array) {
   for (var i = 0; i < array.length; i++) {
-    if (array[i] === value) {
+    if (value === array[i]) {
       return false;
     }
   }
@@ -19,7 +19,7 @@ function isNotInArray(array, value) {
 function unique(array) {
   var result = [];
   for (var i = 0; i < array.length; i++) {
-    if (isNotInArray(result, array[i])) {
+    if (isNotInArray(array[i], result)) {
       result.push(array[i]);
     }
   }

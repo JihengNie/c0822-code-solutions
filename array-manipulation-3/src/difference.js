@@ -11,7 +11,7 @@ use a for loop to check if the item is in the result array
 return the result array
 */
 
-function isNotInArray2(value, array) {
+function isNotInArray(value, array) {
   for (var i = 0; i < array.length; i++) {
     if (value === array[i]) {
       return false;
@@ -23,12 +23,12 @@ function isNotInArray2(value, array) {
 function difference(first, second) {
   var result = [];
   for (var i = 0; i < first.length; i++) {
-    if (isNotInArray2(first[i], second)) {
+    if (isNotInArray(first[i], second)) {
       result.push(first[i]);
     }
   }
   for (var j = 0; j < second.length; j++) {
-    if (isNotInArray2(second[j], result) && isNotInArray2(second[j], first)) {
+    if (isNotInArray(second[j], result) && isNotInArray(second[j], first)) {
       result.push(second[j]);
     }
   }

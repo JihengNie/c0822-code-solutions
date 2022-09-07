@@ -10,7 +10,7 @@ use a for loop
     if yes, push it to the result array
 return result
 */
-function isInArray2(value, array) {
+function isInArray(value, array) {
   for (var i = 0; i < array.length; i++) {
     if (value === array[i]) {
       return true;
@@ -22,12 +22,12 @@ function isInArray2(value, array) {
 function intersection(first, second) {
   var result = [];
   for (var i = 0; i < first.length; i++) {
-    if (isInArray2(first[i], second)) {
+    if (isInArray(first[i], second)) {
       result.push(first[i]);
     }
   }
   for (var j = 0; j < second.length; j++) {
-    if (!isInArray2(second[j], result) && isInArray2(second[j], first)) {
+    if (!isInArray(second[j], result) && isInArray(second[j], first)) {
       result.push(second[j]);
     }
   }

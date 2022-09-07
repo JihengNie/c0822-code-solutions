@@ -8,7 +8,7 @@ use a for loop
 rerturn the result array
 */
 
-function isNotInArray3(value, array) {
+function isNotInArray(value, array) {
   for (var i = 0; i < array.length; i++) {
     if (value === array[i]) {
       return false;
@@ -23,7 +23,7 @@ function union(first, second) {
     result.push(first[i]);
   }
   for (var j = 0; j < second.length; j++) {
-    if (isNotInArray3(second[j], result)) {
+    if (isNotInArray(second[j], result)) {
       result.push(second[j]);
     }
   }
