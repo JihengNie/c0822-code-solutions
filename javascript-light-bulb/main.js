@@ -1,15 +1,16 @@
 var $lightBulb = document.querySelector('.bulb');
 var $lightStatus = document.querySelector('.off');
-var clicks = 0;
+var clicks = true;
 
 function clicksFunction(event) {
-  clicks++;
-  if (clicks % 2 === 0) {
+  if (clicks === true) {
     $lightStatus.className = 'off';
     $lightBulb.className = 'blub bulb-off';
+    clicks = false;
   } else {
     $lightStatus.className = 'on';
     $lightBulb.className = 'blub bulb-on';
+    clicks = true;
   }
 }
 
