@@ -1,0 +1,42 @@
+.text-container {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 36px;
+  white-space: pre;
+  display: flex;
+  font-weight: bold;
+  margin: 2px;
+  margin-top: 35%;
+}
+
+.current {
+  border-bottom: solid;
+}
+
+.typed-correct {
+  color: #18cd1b;
+}
+
+.typed-wrong {
+  color: red;
+}
+
+.typed-no {
+  color: black;
+}
+
+.play-again {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
+  white-space: pre;
+  display: flex;
+  font-weight: bold;
+  margin: 2px;
+}
+
+.hidden {
+  display: none;
+}
