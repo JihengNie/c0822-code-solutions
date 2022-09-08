@@ -1,0 +1,44 @@
+button {
+  border-radius: 8%;
+  color: white;
+  font-size: 24px;
+  border: 0;
+  padding: 0.75rem 1.5rem;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.modal-button {
+  background-color: #4a4ae9;
+}
+
+.pop-up {
+  background-color: white;
+  height: 10rem;
+  width: 20rem;
+  position: fixed;
+  padding: 2.5rem 5rem;
+  left: 40%;
+  top: 35%;
+  border-radius: 8%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  box-shadow: 0 0 0 2000px rgb(0 0 0 / 50%);
+}
+
+.no-button {
+  background-color: #eb5d5d;
+}
+
+.off {
+  display: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
