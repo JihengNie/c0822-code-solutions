@@ -10,6 +10,7 @@ Need an array for
 
 need a function for assigning 2 cards to each player
 */
+
 /*
 var playerName = ['Player1', 'Player2', 'Player3', 'Player4'];
 var PlayerHand = [];
@@ -38,22 +39,57 @@ function shuffleDeck(deck) {
 var shuffledDeck = shuffleDeck(newDeck);
 console.log(shuffledDeck);
 
+var testHand = [newDeck[0], newDeck[13], newDeck[23], newDeck[33], newDeck[43]];
+console.log(testHand);
+
 function assignValuesToCards(CardArray) {
   var scoredArray = [];
   var temp = [];
   for (var i = 0; i < CardArray.length; i++) {
     temp = _.split(CardArray[i], ' ', 2);
-    if (temp[i] === 'Ace') {
+    if (temp[1] === 'Ace') {
       scoredArray.push(11);
       temp = [];
-    } else if (temp[i] === 'Jack' || temp[i] === 'Queen' || temp[i] === 'King') {
+    } else if (temp[1] === 'Jack' || temp[1] === 'Queen' || temp[1] === 'King') {
       scoredArray.push(10);
       temp = [];
     } else {
-      scoredArray.push(_.toNumber(temp[i]));
+      scoredArray.push(_.toNumber(temp[1]));
       temp = [];
     }
   }
   return scoredArray;
 }
+
+console.log(assignValuesToCards(newDeck));
+
+function dealingCards(shuffledDeck, handSize, playerName) {
+  var result = [];
+  var temp = [];
+  var shuffledDeckTemp = shuffledDeck;
+  for (var j = 0; j < playerName.length; j++) {
+    for (var i = 0; i < handSize; i++) {
+      temp.push(shuffledDeckTemp[0]);
+      shuffledDeckTemp = _.drop(shuffledDeckTemp);
+    }
+    result.push(temp);
+    temp = [];
+  }
+  return result;
+}
+
+PlayerHand = dealingCards(shuffledDeck, 2, playerName);
+
+function scoringHands(PlayerHand) {
+  var result = [];
+  for (var i = 0; i < PlayerHand.length; i++) {
+    var cardsPerPlayer = PlayerHand[i];
+    cardsPerPlayer = assignValuesToCards(cardsPerPlayer);
+    result.push(_.sum(cardsPerPlayer));
+    cardsPerPlayer = [];
+  }
+  return result;
+}
+
+console.log(scoringHands(PlayerHand));
 */
