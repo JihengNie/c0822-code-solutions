@@ -1,46 +1,34 @@
 console.log('Lodash is loaded:', typeof _ !== 'undefined');
 
-/*
-Need an array for
-  player name
-  player hand
-  card rank
-  card suit
-  card values
-
-need a function for assigning 2 cards to each player
-*/
-
-/*
-var playerName = ['Player1', 'Player2', 'Player3', 'Player4'];
-var PlayerHand = [];
-var cardRank = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
-var cardSuit = ['Clubs', 'Diamonds', 'Hearts', 'Spades'];
-var cardValues = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-
 function creatingNewDeck(cardRank, cardSuit) {
-  var result = [];
+  var newDeck = [];
   for (var i = 0; i < cardRank.length; i++) {
     for (var j = 0; j < cardSuit.length; j++) {
-      result.push(cardSuit[j] + ' ' + cardRank[i]);
+      newDeck.push(cardSuit[j] + ' ' + cardRank[i]);
     }
   }
-  return result;
+  return newDeck;
 }
-
-var newDeck = creatingNewDeck(cardRank, cardSuit);
-console.log(newDeck);
 
 function shuffleDeck(deck) {
   var shuffledDeck = _.shuffle(deck);
   return shuffledDeck;
 }
 
-var shuffledDeck = shuffleDeck(newDeck);
-console.log(shuffledDeck);
-
-var testHand = [newDeck[0], newDeck[13], newDeck[23], newDeck[33], newDeck[43]];
-console.log(testHand);
+function dealingCards(shuffledDeck, handSize, playerName) {
+  var cardsInPlayerHand = [];
+  var temp = [];
+  var shuffledDeckTemp = shuffledDeck;
+  for (var j = 0; j < playerName.length; j++) {
+    for (var i = 0; i < handSize; i++) {
+      temp.push(shuffledDeckTemp[0]);
+      shuffledDeckTemp = _.drop(shuffledDeckTemp);
+    }
+    cardsInPlayerHand.push(temp);
+    temp = [];
+  }
+  return cardsInPlayerHand;
+}
 
 function assignValuesToCards(CardArray) {
   var scoredArray = [];
@@ -61,35 +49,78 @@ function assignValuesToCards(CardArray) {
   return scoredArray;
 }
 
-console.log(assignValuesToCards(newDeck));
-
-function dealingCards(shuffledDeck, handSize, playerName) {
-  var result = [];
-  var temp = [];
-  var shuffledDeckTemp = shuffledDeck;
-  for (var j = 0; j < playerName.length; j++) {
-    for (var i = 0; i < handSize; i++) {
-      temp.push(shuffledDeckTemp[0]);
-      shuffledDeckTemp = _.drop(shuffledDeckTemp);
-    }
-    result.push(temp);
-    temp = [];
-  }
-  return result;
-}
-
-PlayerHand = dealingCards(shuffledDeck, 2, playerName);
-
 function scoringHands(PlayerHand) {
-  var result = [];
+  var handScores = [];
   for (var i = 0; i < PlayerHand.length; i++) {
     var cardsPerPlayer = PlayerHand[i];
     cardsPerPlayer = assignValuesToCards(cardsPerPlayer);
-    result.push(_.sum(cardsPerPlayer));
+    handScores.push(_.sum(cardsPerPlayer));
     cardsPerPlayer = [];
   }
-  return result;
+  return handScores;
 }
 
-console.log(scoringHands(PlayerHand));
-*/
+function storingIndexOfMaxTerms(array) {
+  var max = _.max(array);
+  var indexOfMaxTerms = [];
+  for (var i = 0; i < array.length; i++) {
+    if (array[i] === max) {
+      indexOfMaxTerms.push(i);
+    }
+  }
+  return indexOfMaxTerms;
+}
+
+function playingTheGame(playerName, handSize) {
+  var cardRank = ['Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+  var cardSuit = ['Clubs', 'Diamonds', 'Hearts', 'Spades'];
+  var playersFinalResult = [];
+  var finalAnnouncement = '';
+  var winner = [];
+
+  // Running the game
+  var newDeck = creatingNewDeck(cardRank, cardSuit);
+  var shuffledDeck = shuffleDeck(newDeck);
+  var playerHand = dealingCards(shuffledDeck, handSize, playerName);
+  var playerHandScore = scoringHands(playerHand);
+
+  // Storing values into player objects
+  for (var i = 0; i < playerName.length; i++) {
+    var temp = {};
+    temp.name = playerName[i];
+    temp.hand = playerHand[i];
+    temp.handScore = playerHandScore[i];
+    playersFinalResult.push(temp);
+    temp = {};
+  }
+  // Deciding winners
+  var indexOfWinners = storingIndexOfMaxTerms(playerHandScore);
+  for (var k = 0; k < indexOfWinners.length; k++) {
+    winner.push(playerName[indexOfWinners[k]]);
+  }
+  console.log(playersFinalResult);
+  // console.log(winner);
+
+  // Winner announcement
+  if (winner.length === 1) {
+    finalAnnouncement = 'The only winner is ' + winner[0];
+  } else {
+    for (var j = 0; j < winner.length; j++) {
+      if (j === winner.length - 1) {
+        finalAnnouncement += 'and ' + winner[j];
+      } else { finalAnnouncement += winner[j] + ', '; }
+    }
+    finalAnnouncement = finalAnnouncement + ' were winners';
+    // Playing until there is only one winner
+    var onlyWinner = playingTheGame(winner, 2);
+    if (onlyWinner.length === 1) {
+      finalAnnouncement = finalAnnouncement + ' but, ' + onlyWinner[0] + ' is the final winner';
+    }
+  }
+  console.log(finalAnnouncement);
+  return winner;
+}
+
+var playerName = ['Player1', 'Player2', 'Player3', 'Player4', 'player5', 'player6'];
+
+playingTheGame(playerName, 2);
