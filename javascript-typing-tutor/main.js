@@ -1,7 +1,7 @@
 var $letterNodeList = document.querySelectorAll('.typed-no');
 var $playAgain = document.querySelector('.play-again');
 
-window.addEventListener('keydown', typingLetters, true);
+window.addEventListener('keydown', typingLetters);
 var i = 0;
 function typingLetters(event) {
   if (event.key !== $letterNodeList[i].textContent && $letterNodeList[i].className === 'typed-no current') {
