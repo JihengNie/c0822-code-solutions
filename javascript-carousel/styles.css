@@ -1,0 +1,39 @@
+.hidden {
+  display: none !important;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.column-full {
+  flex-basis: 100%;
+  display: flex;
+}
+
+.center {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.chevrons {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  font-size: 4rem;
+  padding: 0 5rem;
+  cursor: pointer;
+}
+
+.fa-circle {
+  padding: 2rem 1rem;
+}
