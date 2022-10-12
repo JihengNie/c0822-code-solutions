@@ -1,18 +1,17 @@
 const fs = require('fs');
-let mergerdFiles = '';
+var files = [];
 
-function conCat(path) {
-  fs.readFile(path, 'utf8', (err, data) => {
+function readingFiles(filePath) {
+  fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) throw err;
-    mergerdFiles += data;
-    console.log(mergerdFiles);
+    files.push(data);
   });
-  return mergerdFiles;
 }
 
-let i = 2;
+for (let j = 2; j < process.argv.length; j++) {
+  readingFiles(process.argv[j]);
+}
 
-while (i !== process.argv.length) {
-  conCat(process.argv[i]);
-  i++;
+for (let i = 0; i < files.length; i++) {
+  console.log(files[i]);
 }
