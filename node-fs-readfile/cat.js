@@ -1,33 +1,21 @@
 const fs = require('fs');
-var files = [];
-var counter = 2;
+let counter = 2;
+const files = [];
+const lengthOfInput = process.argv.length;
 
 function readingFiles(filePath) {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) throw err;
-    return data;
+    files[counter] = data;
+    counter++;
+    if (counter === lengthOfInput) {
+      for (let j = 2; j < lengthOfInput; j++) {
+        console.log(files[j]);
+      }
+    }
   });
 }
 
-let index = 0;
-while (counter < process.argv.length) {
-  files[index] = readingFiles(process.argv[counter]);
-  index++;
-  counter++;
+for (let i = 2; i < lengthOfInput; i++) {
+  readingFiles(process.argv[i]);
 }
-
-console.log(files);
-
-function non() {
-  if (counter < process.argv.length) {
-    while (counter < process.argv.length) {
-      files[index] = readingFiles(process.argv[counter]);
-      index++;
-      counter++;
-    }
-  } else {
-    console.log(files);
-  }
-}
-
-non();
