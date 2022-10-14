@@ -26,7 +26,7 @@ app.get('/api/grades', (req, res) => {
   for (const items in grades) {
     gradesArray.push(grades[items]);
   }
-  res.jsonp((gradesArray));
+  res.json(gradesArray);
 });
 
 app.delete('/api/grades/:id', (req, res) => {
