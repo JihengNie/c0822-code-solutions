@@ -16,10 +16,10 @@ app.get('/api/notes/:id', (req, res) => {
   const noteAtId = data.notes[noteId];
   const errorReports = {
     400: {
-      400: 'id is not a positive integer'
+      error: 'id is not a positive integer'
     },
     404: {
-      404: 'No notes with this id'
+      error: 'No notes with this id'
     }
   };
   if (noteId < 0) {
@@ -38,10 +38,10 @@ app.post('/api/notes', (req, res) => {
   const nextId = data.nextId;
   const errorReports = {
     400: {
-      400: 'content is a empty'
+      error: 'content is a empty'
     },
     500: {
-      500: 'an unexpected error occurred'
+      error: 'an unexpected error occurred'
     }
   };
   if (!contentProperty) {
@@ -67,13 +67,13 @@ app.delete('/api/notes/:id', (req, res) => {
   const noteAtId = data.notes[noteId];
   const errorReports = {
     400: {
-      400: 'id is not a positive integer'
+      error: 'id is not a positive integer'
     },
     404: {
-      404: 'No notes with this id'
+      error: 'No notes with this id'
     },
     500: {
-      500: 'an unexpected error occurred'
+      error: 'an unexpected error occurred'
     }
   };
   if (noteId < 0) {
@@ -100,13 +100,13 @@ app.put('/api/notes/:id', (req, res) => {
   const contentProperty = req.body.content;
   const errorReports = {
     400: {
-      400: 'id is not a positive integer or content is a empty'
+      error: 'id is not a positive integer or content is a empty'
     },
     404: {
-      404: 'No notes with this id'
+      error: 'No notes with this id'
     },
     500: {
-      500: 'an unexpected error has occurred'
+      error: 'an unexpected error has occurred'
     }
   };
   if (noteId < 0 || !contentProperty || !noteId) {
