@@ -34,3 +34,24 @@ SELECT "filmId",
 FROM "profit" as "p" JOIN "cost" using ("filmId")
 ORDER BY "totalProfit" DESC
 LIMIT 5;
+
+  SELECT "filmId",
+    "title",
+    -- "description",
+    -- "rating",
+    SUM("p"."amount") as "totalRevenue",
+    COUNT("p"."amount") as "PaymentCount"
+  FROM "films"
+  JOIN "inventory" using ("filmId")
+  JOIN "rentals" using ("inventoryId")
+  JOIN "payments" as "p" using ("customerId")
+  GROUP BY "filmId"
+  ORDER BY "filmId" desc
+-- WITH "totalProfit" AS (
+-- SELECT
+--   "inventoryId",
+--   SUM("amount") as "totalRevenue",
+--   COUNT("amount") as "PaymentCount"
+-- FROM "payments" JOIN "rentals" using ("customerId")
+-- GROUP BY "inventoryId"
+-- ORDER BY "inventoryId" desc
