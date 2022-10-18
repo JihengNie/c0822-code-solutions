@@ -3,15 +3,15 @@
     "title",
     "description",
     "rating",
-    SUM("p"."amount") as "totalRevenue",
-    COUNT("p"."amount") as "PaymentCount"
-  FROM "films"
-  JOIN "inventory" using ("filmId")
-  JOIN "rentals" using ("inventoryId")
-  JOIN "payments" as "p" using ("customerId")
+    SUM("P"."amount") as "totalRevenue",
+    COUNT("P"."amount") as "PaymentCount"
+  FROM "payments" as "P"
+  JOIN "rentals" using ("rentalId")
+  JOIN "inventory" using ("inventoryId")
+  JOIN "films" using ("filmId")
   GROUP BY "filmId"
-  ORDER BY "filmId" desc
   ),
+
 "cost" as (
   SELECT "filmId",
     "title",
@@ -34,24 +34,3 @@ SELECT "filmId",
 FROM "profit" as "p" JOIN "cost" using ("filmId")
 ORDER BY "totalProfit" DESC
 LIMIT 5;
-
-  SELECT "filmId",
-    "title",
-    -- "description",
-    -- "rating",
-    SUM("p"."amount") as "totalRevenue",
-    COUNT("p"."amount") as "PaymentCount"
-  FROM "films"
-  JOIN "inventory" using ("filmId")
-  JOIN "rentals" using ("inventoryId")
-  JOIN "payments" as "p" using ("customerId")
-  GROUP BY "filmId"
-  ORDER BY "filmId" desc
--- WITH "totalProfit" AS (
--- SELECT
---   "inventoryId",
---   SUM("amount") as "totalRevenue",
---   COUNT("amount") as "PaymentCount"
--- FROM "payments" JOIN "rentals" using ("customerId")
--- GROUP BY "inventoryId"
--- ORDER BY "inventoryId" desc
