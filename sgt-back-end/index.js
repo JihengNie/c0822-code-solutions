@@ -21,11 +21,7 @@ app.get('/api/grades', (req, res) => {
   `;
   db.query(sql)
     .then(result => {
-      const table = [];
-      for (let i = 0; i < result.rows.length; i++) {
-        table.push(result.rows[i]);
-      }
-      res.json(table);
+      res.json(result.rows);
     })
     .catch(err => {
       console.error(err);
@@ -41,11 +37,7 @@ app.post('/api/grades', (req, res) => {
   const sql = `
     INSERT INTO "grades" ("name","course","score")
     values ($1, $2, $3)
-  `;
-  const successfulSql = `
-    SELECT *
-    FROM "grades"
-    WHERE "name"= $1 and "course"= $2 and "score"=$3
+    RETURNING*
   `;
   const name = req.body.name;
   const course = req.body.course;
@@ -68,16 +60,7 @@ app.post('/api/grades', (req, res) => {
   }
   db.query(sql, params)
     .then(result => {
-      db.query(successfulSql, params)
-        .then(successQuery => {
-          res.status(201).json(successQuery.rows[0]);
-        })
-        .catch(err => {
-          console.error(err);
-          res.status(500).json({
-            error: 'An undepxected error occurred when retrieveing data'
-          });
-        });
+      res.send(result.rows[0]);
     })
     .catch(err => {
       console.error(err);
