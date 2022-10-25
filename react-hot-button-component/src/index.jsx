@@ -4,6 +4,10 @@ import HotButton from './hot-button';
 
 const container = document.querySelector('#root');
 const root = ReactDOM.createRoot(container);
-const element = <HotButton/>;
 
-root.render(element);
+root.render(
+  <div>
+    <HotButton />
+    <HotButton />
+  </div>
+);

@@ -1,19 +1,18 @@
 import React from 'react';
 
-let i = 0;
-
 export default class HotButton extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isClicked: i };
+    this.state = { clicks: 0 };
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.setState({ isClicked: i++ });
+    this.setState(({ clicks }) => ({ clicks: clicks + 1 }));
   }
 
   render() {
+    const i = this.state.clicks;
     if (i >= 18) {
       return <button className="eighteen-click" onClick={this.handleClick}> Hot Button </button>;
     } else if (i >= 15) {
