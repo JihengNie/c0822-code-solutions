@@ -23,7 +23,6 @@ class RegistrionForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.setState({ password: event.target.value });
     console.log('state:', this.state);
   }
 
