@@ -1,0 +1,37 @@
+button {
+  color: white;
+  padding: 0.5rem 1rem;
+  box-shadow: 5px 5px 5px black;
+  cursor: pointer;
+}
+
+.zero-click {
+  background-color: black;
+}
+
+.three-click {
+  background-color: #351c75;
+}
+
+.six-click {
+  background-color: #674ea7;
+}
+
+.nine-click {
+  background-color: #e06666;
+}
+
+.twelve-click {
+  color: black;
+  background-color: #f6b26b;
+}
+
+.fifteen-click {
+  color: black;
+  background-color: #ff0;
+}
+
+.eighteen-click {
+  color: black;
+  background-color: #fff;
+}
