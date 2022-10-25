@@ -1,0 +1,24 @@
+button {
+  border-radius: 50%;
+  padding: 5rem;
+  cursor: pointer;
+  font-size: xxx-large;
+  margin-bottom: 2rem;
+  background-color: white;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  max-width: 250px;
+}
+
+i:hover {
+  cursor: pointer;
+  color: green;
+}
+
+.hidden {
+  display: none !important;
+}
