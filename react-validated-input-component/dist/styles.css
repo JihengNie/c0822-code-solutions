@@ -1,0 +1,16 @@
+.hidden {
+  display: none !important;
+}
+
+.red {
+  margin: auto 0.5rem;
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
+span {
+  width: 100%;
+}
