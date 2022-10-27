@@ -4,8 +4,7 @@ export default class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
-      length: this.props.poke.length
+      index: 0
     };
 
     this.handleRight = this.handleRight.bind(this);
@@ -16,13 +15,13 @@ export default class Carousel extends React.Component {
 
   handleRight() {
     clearInterval(this.timer);
-    this.setState({ index: (this.state.index + 1) % this.state.length });
+    this.setState({ index: (this.state.index + 1) % this.props.poke.length });
     this.timer = setInterval(() => this.handleRight(), 3000);
   }
 
   handleleft() {
     clearInterval(this.timer);
-    this.setState({ index: this.state.index - 1 === -1 ? this.state.length - 1 : this.state.index - 1 });
+    this.setState({ index: this.state.index - 1 === -1 ? this.props.poke.length - 1 : this.state.index - 1 });
     this.timer = setInterval(() => this.handleRight(), 3000);
   }
 
@@ -58,11 +57,11 @@ export default class Carousel extends React.Component {
         </div>
         <div className="row">
           <div className="column-full center bubbles-container">
-            <i id={0} onClick={this.handleBubble} className={this.state.index === 0 ? 'fa-solid fa-circle' : 'fa-regular fa-circle'}></i>
-            <i id={1} onClick={this.handleBubble} className={this.state.index === 1 ? 'fa-solid fa-circle' : 'fa-regular fa-circle'}></i>
-            <i id={2} onClick={this.handleBubble} className={this.state.index === 2 ? 'fa-solid fa-circle' : 'fa-regular fa-circle'}></i>
-            <i id={3} onClick={this.handleBubble} className={this.state.index === 3 ? 'fa-solid fa-circle' : 'fa-regular fa-circle'}></i>
-            <i id={4} onClick={this.handleBubble} className={this.state.index === 4 ? 'fa-solid fa-circle' : 'fa-regular fa-circle'}></i>
+            {pokeData.map(item => {
+              return (
+                <i id={pokeData.indexOf(item)} key={item.Id} onClick={this.handleBubble} className={this.state.index === pokeData.indexOf(item) ? 'fa-solid fa-circle' : 'fa-regular fa-circle'}></i>
+              );
+            })}
           </div>
         </div>
       </div>
