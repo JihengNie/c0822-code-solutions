@@ -19,7 +19,7 @@ export default class App extends React.Component {
      * Then 😉, once the response JSON is received and parsed,
      * update state with the received todos.
      */
-    fetch('http://localhost:3000/api/todos')
+    fetch('/api/todos')
       .then(response => response.json())
       .then(data => this.setState({ todos: data }))
       .catch(error => { console.error(error); });
@@ -42,14 +42,14 @@ export default class App extends React.Component {
     * TIP: Use Array.prototype.concat to create a new array containing the contents
     * of the old array, plus the object returned by the server.
     */
-    fetch('http://localhost:3000/api/todos', {
+    fetch('/api/todos', {
       method: 'POST',
-      'Content-Type': 'application/json',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newTodo)
     })
       .then(response => response.json())
       .then(data => {
-        const arrayCopy = this.state.todos.concat([data]);
+        const arrayCopy = this.state.todos.concat(data);
         this.setState({ todos: arrayCopy });
       })
       .catch(error => { console.error(error); });
@@ -78,13 +78,17 @@ export default class App extends React.Component {
      * And specify the "Content-Type" header as "application/json"
      */
 
-    const index = this.state.todos.findIndex(todo => todo.todoId === todoId);
+    const index = this.state.todos.findIndex(todoItem => todoItem.todoId === todoId);
     const completedStatus = this.state.todos[index].isCompleted;
-    const oppositeStatus = completedStatus
-      ? { isCompleted: false }
-      : { isCompleted: true };
+    let oppositeStatus = {};
 
-    fetch(`http://localhost:3000/api/todos/${todoId}`, {
+    if (completedStatus) {
+      oppositeStatus = { isCompleted: false };
+    } else {
+      oppositeStatus = { isCompleted: true };
+    }
+
+    fetch(`/api/todos/${todoId}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(oppositeStatus)
@@ -92,9 +96,9 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         const arrayCopy = this.state.todos.concat();
-        arrayCopy.splice(index, 1, data);
+        arrayCopy[index] = data;
         this.setState({ todos: arrayCopy });
-      });
+      }).catch(error => { console.error(error); });
   }
 
   render() {
