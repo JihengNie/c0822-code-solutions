@@ -1,0 +1,165 @@
+Before anything user interaction
+  Once the page is loaded, the browser sends a get request to http://localhost:3000/ for our index.html page
+  Once we recieved the request, the browser parse the html page.
+    While parsing the index.html file, once the browser reaches a link tag, it sends a GET request for to the url provided.
+      We have two link tags, so we are sending a get request to:
+        -bootstrap.min.css
+        -all.min.css
+    Next, the browser reaches a script tag, that sends an HTTP request to the file main.js.
+        The main.js file is auto compiled from webpack of the index.js file and it bundles all of our files into one main.js.
+          In the bundling process, it uses babel to convert all jsx files into js files.
+    Next, the main.js file creates react elements from the index.jsx file that renders the react element <App>
+      This react element removes everthing from our div that has an id of root, and replaces the content with its content
+
+  In the react element <App>:
+    We first start by rendering the element
+      The first render, we check if the IsAuthorizing property of the state is truthy
+        Since we initilized it to be true, we will return null
+    Next we move to componentDidMount, if it did successfully mount,
+      we set up an event listener for the event hashchange. If this event is detected, we changes the state of the route to the current window hash.
+      Then we set the const variable token to be the 'react-context-jwt' item from localstorage
+      and we set the const variable user to be the token decoded if only the token is truthy. Else, we set it to null
+      Lastly, we update the user and IsAuthorizing property of the states object
+      This will schedule a re render
+    On the re render
+      Since we updated IsAuthorizing it to be false, we will
+        sets the const variable contextValue to { user, route, handleSignIn, handleSignOut }
+          This variable will be used as the AppContext.Provider for the other components that are its children
+            The current children are the modules:
+              NavBar
+              PageContainer
+                Auth
+                NotFound
+        Next we will render the following react elements
+          <NavBar>
+          <PageContainer>
+            {this.renderPage()}
+
+      The this.renderPage() method checks the route the page is currently on that was passed from the contextValue of the AppContext.Provider.
+      The intial route is '', so, we render the <Home> react element
+  In the <Home> element
+    The render checks if the user property of the context object is falsey.
+      Since our initial user property is null, we render <Redirect> with a prop to="sign-in"
+  In the <Redirect> element
+    It changes the hash from '' to 'sign-in'
+  This causes our window eventlistenr to detect the hash change and schdules a re render
+  This will cause our <App> element's renderPage() to re check the route the page is currently on that was passed from the contextValue of the AppContext.Provider
+    The route property is now 'sign-in, so we render <Auth> react element
+  In the <Auth> element
+    we recieve the context from the AppContext provider and have access to the variables
+    we then check the routh.path to be equal to 'sign-in'. It will since we jsut assigned it that
+    the welcome message will adjust to 'Please sign in to continue'
+    we will also render <AuthForm> with props
+      key
+      action
+      onSignIn
+  In the <AuthForm> element
+    We recieve the props and since there is no componentDidMount check, we render a
+    form element that has
+      Username input
+      Password input
+      Register now link anchor
+      Submit button
+
+User can sign up
+  On the sign in page assume the user clicks the 'register now. link to sign up.
+    Once the link is clicked, it triggers a hash change event, that changes the route to "sign-up"
+    The window event listener detects this hash change and re renders the react element <Auth> with the new hash
+    This will also set the state of route to be 'sign up'.
+    schdules a re render of the <App> element
+    this will re render <Auth> element
+  In the react element <Auth>:
+    In the render method, we recieve the context from the AppContext provider and have access to the variables
+      user
+      route
+      handleSignIn
+
+    With these variables, we check if the route.path is equal to 'sign-in'
+    Since the routhe is 'sign-up',
+      the welcome message adjust to 'Create an account to get started!'
+      Then we return a div with children
+        <Header>
+        <P> Welcome message </p>
+        <AuthForm> with props
+          key
+          action
+          onSignIn
+      Note: There are other divs being rendered, but they are not really changing, so I am ignoring them for the moment
+
+  In the react element <AuthForm>
+    We recieve the props and since there is no componentDidMount check, we render a
+    form element that has
+      Username
+      Password
+      Sign in instead link
+      Submit
+    Assuming the user did not click sign in instead link and enters a username and password followed by submitting the form
+    Once the form is submitted, the event Submit is triggered and our handleSubmit function is activitated to handle this event
+    In the handleSubmit function
+      We start by preventing the default behavior of the browser and do not reload
+      Next, we send a post request to /api/auth/sign-up (We get sign-up here from the action prop)
+        with a json.stringifyed version of the username and password
+      Next, this post request is handled by our index.js file that recieves the request
+      The request message includes a username and a password.
+      We check if either the username or password is false.
+        If yes, we throw an error
+      Next, we use argon2 to hash the password and inserted the hashed passowrd and username into our users table
+      If it was successfully entered into the database, we return a okay status of 201
+      Else, we pass the error the errorMiddleware that will check if the error is a ClientError, JsonWebTokenError, or something else
+      Assuming the request is successful and no errors occurred, we then change the window hash to "sign-in",
+      This will trigger a setState method, that schdules a re-render of the <App> element
+      This will redirect us a new <Auth> page for sign in
+
+User can sign in
+  We start at the <AuthForm> react element from the <Auth> page for sign in
+  Once the user input their username, passowrd, and press submit
+    We send a POST request to /api/auth/sign-in (this is sign-in because the hash is sign-in)
+    with the json.stringifyed version of the username and passowrd
+    This request is handled by index.js file
+      The server takes our post request and checks if the username or password is false. If yes, we return an error
+      Next, we select
+        userId
+        hashedPassword
+      from the users table where the username is the same as our request
+      We check if result is false, if yes, we return an error
+      Else, we destructrue the userId and hashedPassword from our query and user argon2 to verify if
+        our hashedPassword is equal to the password we entered after it is hashed
+      if it does not match, we throw an error
+      Else, we create a JSON web token with jwt.sign using the uderId and username as the payload and our enviroment Token_secret.
+      We then send back an object that contain
+        token with value of the webtoken
+        payload with the value of username and userId
+
+    Once the server sends this back, the client then checks if the token and user is truthy
+    If yes, we use the onSignIn method of the props that we passed.
+      (This method is entered as a prop to <AuthForm>, but originiates from <App> as a context)
+    In the handleSignIn method from the <App> element
+      We destructrue the user and token from the result object
+      We then send the item to localstorage that stores the token as react-context-jst
+      Next, we set the state to the user which schdules a re-render of the <App> element.
+    Once we sign in, we render the <Auth> element. This element now checks if the user context is truthy
+    If yes, it returns <Redirect> element with a prop of 'to'
+    In the <Redirect> element
+      It checks if the prop.to is an empty string, if yes, it changes it '#' and replaces the URL
+      Since this changes the hash, it triggers a setstate channge and causes a re-render to the <Home> element.
+
+User can stay signed in
+    When the <App> element first renders, it checks if the IsAuthorizing state is truthy. If yes, we return null.
+    Next, the <App> goes to componentDidMount()
+      Here, we set the state user equal to the token from our localstorage and set IsAuthorizing to false
+      The setState schdules a re-render
+    Assuming we are signed in, this means that the user variable is set to the value jwt from our localstorage
+    So, when we open the main page, we are rendering the <Home> element which checks if the user variable is falsey.
+      If falsey, we change the hash to 'sign-in' and prompt the user to sign in
+      Else, we render our giphy
+    In short, we are assigning our user property of the state the value of a localstorage jwt, which allows us to stay signed in
+    since the only way to remove this token is to sign-out
+
+User can sign out
+    In the <NavBar> element, we have a button for sign out
+    This button has an event handler function for when the button is clicked called handleSignOut
+    The handleSignOut event handler is from the <App> element as a context
+    This function removes the token saved in the localstorage and set the state of the user to be null
+      the set state schdules a re render and now since the user is null, the <Home> element changes the hash to 'Sign-in'
+    The hash change is detected by our windwow event listener for the hash change and changes the route state to be the current hash
+      The set state schdules a re render and we render <Auth> as a sign in
